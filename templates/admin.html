@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<header>Admin Paneli</header>
+<div class="container">
+    <h2>Depo Bilgilerini Güncelle</h2>
+    <form method="POST">
+        <table>
+            <tr>
+                <th>Depo</th>
+                <th>Stok</th>
+                <th>Araç Sayısı</th>
+                <th>Max Uzaklık</th>
+                <th>Taşıma Maliyeti</th>
+            </tr>
+            {% for depo in depolar %}
+            <tr>
+                <td>{{ depo.ad }}</td>
+                <td><input type="number" name="stok_{{ loop.index0 }}" value="{{ depo.stok }}" required></td>
+                <td><input type="number" name="arac_sayisi_{{ loop.index0 }}" value="{{ depo.arac_sayisi }}" required></td>
+                <td><input type="number" name="max_uzaklik_{{ loop.index0 }}" value="{{ depo.max_uzaklik }}" required></td>
+                <td><input type="number" step="0.1" name="tasima_maliyeti_{{ loop.index0 }}" value="{{ depo.tasima_maliyeti }}" required></td>
+            </tr>
+            {% endfor %}
+        </table>
+        <button type="submit">Güncelle</button>
+    </form>
+</div>
+{% endblock %}

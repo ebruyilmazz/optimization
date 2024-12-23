@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+
+{% block content %}
+<header>Sonuçlar</header>
+<div class="container">
+    <h2>Optimizasyon Sonuçları</h2>
+    <table>
+        <tr>
+            <th>Depo</th>
+            <th>Mağaza</th>
+            <th>Gönderilen Ürün</th>
+            <th>Maliyet</th>
+        </tr>
+        {% for detay in results.detaylar %}
+        <tr>
+            <td>{{ detay.depo }}</td>
+            <td>{{ detay.magaza }}</td>
+            <td>{{ detay.urun }}</td>
+            <td>{{ detay.maliyet }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <!-- Hatalar -->
+    {% if results.hatalar %}
+    <div class="alert alert-danger">
+        <h4>Hatalı Girişler:</h4>
+        <ul>
+            {% for hata in results.hatalar %}
+            <li>{{ hata }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+    <!-- Yetersiz Stok Uyarıları -->
+    {% if results.stok_yetersiz %}
+    <div class="alert alert-warning">
+        <ul>
+            {% for uyarı in results.stok_yetersiz %}
+                <li>{{ uyarı }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+    <!-- Depo Stok Aşımı Uyarıları -->
+    {% if results.stok_asimi %}
+    <h2 style="color: red;">Depo Stok Aşımı Uyarıları:</h2>
+    <ul>
+        {% for uyarı in results.stok_asimi %}
+            <li>{{ uyarı }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    <h2>Toplam Maliyet</h2>
+    <p><strong>{{ results.toplam_maliyet }} birim</strong></p>
+
+    <h2>Durum</h2>
+    <p><strong>{{ results.durum }}</strong></p>
+
+    <h2>Grafiksel Görselleştirme</h2>
+    <div id="chart_div" style="width: 100%; height: 500px;"></div>
+
+</div>
+
+<script src="https://www.gstatic.com/charts/loader.js"></script>
+<script>
+    google.charts.load('current', {'packages':['bar']});
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+            ['Depo', 'Mağaza', 'Gönderilen Ürün', 'Maliyet'],  // Başlıklar
+            {% for detay in results.detaylar %}
+                ['{{ detay.depo }}', '{{ detay.magaza }}', '{{ detay.urun }}', '{{detay.maliyet }}'],
+            {% endfor %}
+        ]);
+
+        var options = {
+            chart: {
+                title: 'Depodan Mağazalara Ürün Dağılımı ve Maliyetler',
+                subtitle: 'Depo ve Mağaza bazında gönderilen ürün miktarları ve maliyetler',
+            },
+            hAxis: {
+                title: 'Depo',
+                titleTextStyle: {color: '#333'}
+            },
+            vAxis: {
+                title: 'Miktar',
+                minValue: 0
+            },
+            bars: 'vertical'  // Grafik tipi olarak yatay bar
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('chart_div'));
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+    }
+</script>
+
+{% endblock %}

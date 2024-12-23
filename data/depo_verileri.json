@@ -1,0 +1,100 @@
+{
+    "depolar": [
+        {
+            "id": 1,
+            "ad": "Depo 1",
+            "stok": 500,
+            "arac_sayisi": 2,
+            "max_uzaklik": 320,
+            "tasima_maliyeti": 5.0
+        },
+        {
+            "id": 2,
+            "ad": "Depo 2",
+            "stok": 400,
+            "arac_sayisi": 1,
+            "max_uzaklik": 210,
+            "tasima_maliyeti": 6.0
+        },
+        {
+            "id": 3,
+            "ad": "Depo 3",
+            "stok": 300,
+            "arac_sayisi": 1,
+            "max_uzaklik": 400,
+            "tasima_maliyeti": 4.5
+        }
+    ],
+    "magazalar": [
+        {
+            "id": 1,
+            "ad": "Magaza 1",
+            "depolara_uzakliklar": {
+                "Depo 1": 100,
+                "Depo 2": 150,
+                "Depo 3": 200
+            }
+        },
+        {
+            "id": 2,
+            "ad": "Magaza 2",
+            "depolara_uzakliklar": {
+                "Depo 1": 250,
+                "Depo 2": 100,
+                "Depo 3": 300
+            }
+        },
+        {
+            "id": 3,
+            "ad": "Magaza 3",
+            "depolara_uzakliklar": {
+                "Depo 1": 50,
+                "Depo 2": 200,
+                "Depo 3": 150
+            }
+        },
+        {
+            "id": 4,
+            "ad": "Magaza 4",
+            "depolara_uzakliklar": {
+                "Depo 1": 400,
+                "Depo 2": 300,
+                "Depo 3": 100
+            }
+        }
+    ],
+    "stok_talepleri": {
+        "magaza_0": {
+            "toplam_stok": 20,
+            "uzakliklar": [
+                30,
+                40,
+                50
+            ]
+        },
+        "magaza_1": {
+            "toplam_stok": 30,
+            "uzakliklar": [
+                20,
+                40,
+                50
+            ]
+        },
+        "magaza_2": {
+            "toplam_stok": 80,
+            "uzakliklar": [
+                50,
+                60,
+                70
+            ]
+        },
+        "magaza_3": {
+            "toplam_stok": 70,
+            "uzakliklar": [
+                90,
+                80,
+                60
+            ]
+        }
+    }
+}

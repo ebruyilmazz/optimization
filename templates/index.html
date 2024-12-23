@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<header>Depo Bilgileri</header>
+<div class="container">
+    <h2>Depolar</h2>
+    <table>
+        <tr>
+            <th>Depo</th>
+            <th>Stok</th>
+            <th>Araç Sayısı</th>
+            <th>Max Uzaklık</th>
+            <th>Taşıma Maliyeti</th>
+        </tr>
+        {% for depo in depolar %}
+        <tr>
+            <td>{{ depo.ad }}</td>
+            <td>{{ depo.stok }}</td>
+            <td>{{ depo.arac_sayisi }}</td>
+            <td>{{ depo.max_uzaklik }}</td>
+            <td>{{ depo.tasima_maliyeti }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

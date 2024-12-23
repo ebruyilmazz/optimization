@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+<header>Kullanıcı Paneli</header>
+<div class="container">
+    <h2>Mağaza Taleplerini Gir</h2>
+    <form method="POST">
+        {% for i in range(4) %}
+        <div class="magaza">
+            <h3>Mağaza {{ i + 1 }}</h3>
+            <table>
+                <tr>
+                    <th>Toplam Stok Talebi</th>
+                    <td><input type="number" name="stok_talebi_{{ i }}" placeholder="Stok Talebi" required></td>
+                </tr>
+                <tr>
+                    <th>Depo 1'e Uzaklık</th>
+                    <td><input type="number" name="uzaklik_{{ i }}_0" placeholder="Uzaklık (km)" required></td>
+                </tr>
+                <tr>
+                    <th>Depo 2'ye Uzaklık</th>
+                    <td><input type="number" name="uzaklik_{{ i }}_1" placeholder="Uzaklık (km)" required></td>
+                </tr>
+                <tr>
+                    <th>Depo 3'e Uzaklık</th>
+                    <td><input type="number" name="uzaklik_{{ i }}_2" placeholder="Uzaklık (km)" required></td>
+                </tr>
+            </table>
+        </div>
+        {% endfor %}
+        <button type="submit">Hesapla</button>
+    </form>
+</div>
+{% endblock %}
